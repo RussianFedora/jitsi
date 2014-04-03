@@ -8,16 +8,7 @@
 
 %define libdir_name jitsi
 
-%if 0%{?sles_version}
-  %define libopenssl libopenssl0_9_8
-  %define disablegost --disable-gost
-%else
-  %define libopenssl libopenssl1_0_0
-%endif
-%if 0%{?fedora}
-  %define disablegost --disable-gost
-%endif
-
+%define disablegost --disable-gost
 %ifarch x86_64 amd64
   %define folder linux-64
 %else
@@ -39,8 +30,6 @@ Source4:        jitsi_100x100.png
 Source5:        jdic_misc.tar.xz
 Source6:        ldns-1.6.11.tar.xz
 Source7:        unbound-1.4.14.tar.xz
-# PATCH-FIX-OPENSUSE sysactivity.patch -- fixes location of libraries
-#Patch1:         sysactivity.patch
 BuildRoot:      %{_tmppath}/%{name}-%{version}-build
 
 BuildRequires:  java >= 1.6.0 java-devel >= 1.6.0 xalan-j2 ant
@@ -208,8 +197,7 @@ cp %{SOURCE3} %{buildroot}%{_datadir}/applications/
 
 
 
-#%clean
-#rm -rf %{buildroot}
+
 
 
 %files
