@@ -4,7 +4,7 @@ Summary(de): Open Source Anrufe und Chat
 Version: 2.4.4997
 Release: 1%{?dist}
 Group: Applications/Internet
-License: GNU Lesser General Public License
+License: LGPLv2+
 URL: https://www.jitsi.org
 Source0: https://download.jitsi.org/jitsi/src/%{name}-src-%{version}.zip
 Source1: jitsi.sh
