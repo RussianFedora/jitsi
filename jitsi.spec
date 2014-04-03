@@ -1,28 +1,28 @@
-#
 # spec file for package jitsi
 
-#
 
 
-%define release_prefix 4997
+
 
 %define libdir_name jitsi
 
+
 %define disablegost --disable-gost
-#%ifarch x86_64 amd64
-#  %define folder linux-64
-#%else
-#  %define folder linux
-#%endif
+
+%ifarch x86_64 amd64
+  %define folder linux-64
+%else
+  %define folder linux
+%endif
 
 Name:           jitsi
 Version:        2.4
-Release:        %{release_prefix}
+Release:        4997
 Summary:        Multiprotocol (SIP, XMPP/Jabber, ecc.) VoIP and instant messaging software
 Group:          Productivity/Networking/Instant Messenger
 License:        LGPL-2.1+
 Url:            http://www.jitsi.org
-Source0:        http://download.jitsi.org/jitsi/src/jitsi-src-%{version}.%{release_prefix}.zip
+Source0:        http://download.jitsi.org/jitsi/src/jitsi-src-%{version}.%{release}.zip
 Source1:        jitsi-32.sh
 Source2:        jitsi-64.sh
 Source3:        Jitsi.desktop
@@ -41,11 +41,11 @@ BuildRequires:  libXScrnSaver-devel libX11-devel libXt-devel libXtst-devel libXv
 BuildRequires:  libmatthew-java desktop-file-utils
 BuildRequires:  sane-backends-libs expat expat-devel openssl-devel
 BuildRequires:  opus-devel pulseaudio-libs-devel
-
+BuildRequires:  ldns-devel >= 1.6.11
+BuildRequires:  unbound-devel >= 1.4.14
 
 Requires:       java >= 1.6.0
 Requires:       libmatthew-java
-
 
 %description
 Jitsi is an audio/video and chat communicator that supports protocols
@@ -54,8 +54,7 @@ useful features such as voice and chat encryption.
 
 %prep
 %setup -T -q -b 0 -n jitsi
-tar -xf %{SOURCE5}
-%patch1
+
 
 %build
 
@@ -108,41 +107,9 @@ gcc -shared -o libjdic_misc.so alerter.o
 %endif
 cd ..
 
-#Build libjunbound
-export CPATH="/usr/lib/jvm/java/include:/usr/lib/jvm/java/include/linux:$CPATH"
-export CPATH="%{_libdir}/jvm/java/include:%{_libdir}/jvm/java/include/linux:$CPATH"
-cd src/native/libjunbound
-out=`pwd`/build/linux
-prefix=$out/libs
-mkdir -p $out
-mkdir -p $prefix
-cd $out
-ldns=ldns-1.6.11
-unbound=unbound-1.4.14
-cp %{SOURCE6} .
-cp %{SOURCE7} .
-tar -xJvf $ldns.tar.xz
-tar -xJvf $unbound.tar.xz
-cd $out/$ldns
-./configure --with-pic %{?disablegost} --prefix=$prefix CFLAGS="%{optflags}"
-make %{?_smp_mflags}
+%configure
+make
 make install
-cd $out/$unbound
-patch -p 1 -i $out/../../unbound.patch
-./configure --with-pic %{?disablegost} --prefix=$prefix --with-ldns=$prefix CFLAGS="%{optflags}"
-make %{?_smp_mflags}
-make install
-cd $out
-gcc %{optflags} $out/../../src/net_java_sip_communicator_impl_dns_UnboundApi.cpp -fPIC -shared -o libjunbound.so \
-  -I%{_libdir}/jvm/java/include -I%{_libdir}/jvm/java/include/linux -Wl,-Bstatic -L$prefix/lib -lunbound -lldns \
-  -I$prefix/include -Wl,-Bdynamic -lcrypto
-strip libjunbound.so
-%ifarch x86_64 amd64
-  cp ./libjunbound.so ../../../../../lib/native/linux-64
-%else
-  cp ./libjunbound.so ../../../../../lib/native/linux
-%endif
-cd ../../..
 
 %install
 
@@ -191,11 +158,12 @@ cp %{SOURCE4} %{buildroot}%{_datadir}/pixmaps/
 
 #Install desktop file
 mkdir -p %{buildroot}%{_datadir}/applications/
-#cp %{SOURCE3} %{buildroot}%{_datadir}/applications/
+cp %{SOURCE3} %{buildroot}%{_datadir}/applications/
+%if 0%{?suse_version}
+  %suse_update_desktop_file Jitsi Network Telephony InstantMessaging
+%else
   desktop-file-install --add-category="Network;Telephony" --dir=%{buildroot}%{_datadir}/applications %{SOURCE3}
-
-
-
+%endif
 
 
 
