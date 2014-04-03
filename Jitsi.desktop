@@ -1,0 +1,10 @@
+[Desktop Entry]
+Comment=VoIP, chat and Instant messagging
+Exec=jitsi
+GenericName=VoIP and Instant messaging
+Icon=jitsi_100x100
+Name=Jitsi
+StartupNotify=true
+Terminal=false
+Type=Application
+Categories=Network;InstantMessaging;Telephony
