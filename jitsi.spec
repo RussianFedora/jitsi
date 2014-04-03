@@ -49,24 +49,15 @@ BuildRequires:  speex speex-devel pulseaudio-libs alsa-lib-devel libvpx-devel
 BuildRequires:  xorg-x11-proto-devel xorg-x11-server-devel
 BuildRequires:  glib2-devel gtk2-devel gnome-vfs2-devel libgnome-devel
 BuildRequires:  xml-commons-apis  
-%if 0%{?suse_version}
-BuildRequires:  matthewlib-java update-desktop-files libtool
-BuildRequires:  libexpat1 libexpat-devel
-BuildRequires:  %{libopenssl} libopenssl-devel
-BuildRequires:  libasound2 libopus-devel pulseaudio-devel
-%else
 BuildRequires:  libXScrnSaver-devel libX11-devel libXt-devel libXtst-devel libXv-devel 
 BuildRequires:  libmatthew-java desktop-file-utils
 BuildRequires:  sane-backends-libs expat expat-devel openssl-devel
 BuildRequires:  opus-devel pulseaudio-libs-devel
-%endif
+
 
 Requires:       java >= 1.6.0
-%if 0%{?suse_version}
-Requires:       matthewlib-java
-%else
 Requires:       libmatthew-java
-%endif
+
 
 %description
 Jitsi is an audio/video and chat communicator that supports protocols
@@ -213,11 +204,8 @@ cp %{SOURCE4} %{buildroot}%{_datadir}/pixmaps/
 #Install desktop file
 mkdir -p %{buildroot}%{_datadir}/applications/
 cp %{SOURCE3} %{buildroot}%{_datadir}/applications/
-%if 0%{?suse_version}
-  %suse_update_desktop_file Jitsi Network Telephony InstantMessaging
-%else
   desktop-file-install --add-category="Network;Telephony" --dir=%{buildroot}%{_datadir}/applications %{SOURCE3}
-%endif
+
 
 
 #%clean
