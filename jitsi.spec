@@ -28,8 +28,6 @@ Source2:        jitsi-64.sh
 Source3:        Jitsi.desktop
 Source4:        jitsi_100x100.png
 Source5:        jdic_misc.tar.xz
-Source6:        ldns-1.6.11.tar.xz
-Source7:        unbound-1.4.14.tar.xz
 
 BuildRequires:  java >= 1.6.0 java-devel >= 1.6.0 xalan-j2 ant
 BuildRequires:  gcc-c++ dbus-devel xz unzip autoconf automake
@@ -41,6 +39,8 @@ BuildRequires:  libXScrnSaver-devel libX11-devel libXt-devel libXtst-devel libXv
 BuildRequires:  libmatthew-java desktop-file-utils
 BuildRequires:  sane-backends-libs expat expat-devel openssl-devel
 BuildRequires:  opus-devel pulseaudio-libs-devel
+BuildRequires:  ldns-devel >= 1.6.11
+BuildRequires:  unbound-devel >= 1.4.14
 BuildRequires:  ldns-devel >= 1.6.11
 BuildRequires:  unbound-devel >= 1.4.14
 
