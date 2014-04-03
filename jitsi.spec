@@ -56,9 +56,9 @@ Patch1:         sysactivity.patch
 BuildRoot:      %{_tmppath}/%{name}-%{version}-build
 
 BuildRequires:  java >= 1.6.0 java-devel >= 1.6.0 xalan-j2 ant
-BuildRequires:  gcc-c++ dbus-1-devel xz unzip autoconf automake
+BuildRequires:  gcc-c++ dbus-devel xz unzip autoconf automake
 BuildRequires:  speex speex-devel pulseaudio-libs alsa-lib-devel libvpx-devel
-BuildRequires:  xorg-x11-proto-devel xorg-x11-devel
+BuildRequires:  xorg-x11-proto-devel xorg-x11-server-devel
 BuildRequires:  glib2-devel gtk2-devel gnome-vfs2-devel libgnome-devel
 BuildRequires:  xml-commons-apis  
 %if 0%{?suse_version}
