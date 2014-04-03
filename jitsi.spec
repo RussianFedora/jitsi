@@ -40,7 +40,7 @@ Source5:        jdic_misc.tar.xz
 Source6:        ldns-1.6.11.tar.xz
 Source7:        unbound-1.4.14.tar.xz
 # PATCH-FIX-OPENSUSE sysactivity.patch -- fixes location of libraries
-Patch1:         sysactivity.patch
+#Patch1:         sysactivity.patch
 BuildRoot:      %{_tmppath}/%{name}-%{version}-build
 
 BuildRequires:  java >= 1.6.0 java-devel >= 1.6.0 xalan-j2 ant
