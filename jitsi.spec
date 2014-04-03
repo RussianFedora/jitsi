@@ -97,8 +97,8 @@ cp lib/felix.client.run.properties %{buildroot}/usr/lib/jitsi/lib/
 # Make felix deploy its bundles in ~/.felix/sip-communicator.bin
 sed -i -e "s/felix.cache.profiledir=jitsi.bin/felix.cache.profile=jitsi.bin/" %{buildroot}/usr/lib/jitsi/lib/felix.client.run.properties
 
-%clean
-rm -rf %{buildroot}
+#%clean
+#rm -rf %{buildroot}
 
 %files
 %{_bindir}/%{name}
@@ -110,48 +110,6 @@ rm -rf %{buildroot}
 %{_datadir}/pixmaps/%{name}.svg
 
 %changelog
-* Fri Dec 13 2013 Huaren Zhong <huaren.zhong@gmail.com> - 2.3.4978
-- Rebuild for Fedora
-* Mon Mar 11 2013 Pavel Tankov <ptankov@bluejimp.com>
-- Now depends on java >= 0:1.5.0.
-* Thu Jan 31 2013 Damian Minkov <damencho@jitsi.org>
-- Fixed startup script. 
-- Add felix.framework and felix.main dependencies.
-- Fix warning about conflicting folders with filesystem package.
-* Wed Mar 23 2011 Pavel Tankov <tankov_pavel@yahoo.com>
-- Renamed to the new project name -jitsi
-* Mon Apr 19 2010 Pavel Tankov <tankov_pavel@yahoo.com>
-- Now depends on java >= 1:1.5.0.
-* Wed Mar 31 2010 Pavel Tankov <tankov_pavel@yahoo.com>
-- Handled the manpages.
-* Tue Mar 30 2010 Pavel Tankov <tankov_pavel@yahoo.com>
-- Migrated the build process on a Fedora 12 x86_64 machine. It used to be a
-  Debian which, after a distupgrade, couldn't run rpmbuild properly anymore.
-- Took out the svn update and ant rebuild actions and put them in the external
-  script that calls rpmbuild with this spec.
-- Updated the description section.
-* Tue Dec 18 2007 Pavel Tankov <tankov_pavel@yahoo.com>
-- Put SC bundles and libraries under /usr/lib instead of /usr/share
-- Changed BuildPrereq to subversion instead of cvs
-- Changed the "Source:" tag to reflect the new location of the last nightly build
-- Patched the launcher script so that LD_PRELOAD points to /usr/lib/libaoss.so.0
-  instead of /usr/lib/libaoss.so
-* Fri Feb 23 2007 Pavel Tankov <tankov_pavel@yahoo.com>
-- Fixed to reflect the new guidelines for the layout
-  on http://www.sip-communicator.org/index.php/Documentation/HowToBuildAnInstaller
-- Removed the folder /usr/share/sip-communicator/lib/os-cpecific
-  because it was not needed.
-- Added stuff from sc-bundles/os-specific/linux/ because it was missing.
-- This fix resulted in the systray icon showing now.
-* Thu Feb 15 2007 Pavel Tankov <tankov_pavel@yahoo.com>
-- Fixed to reflect the new images in $RPM_BUILD_ROOT/usr/share/pixmaps/
-- TODO: incorporate the systray icon.
-* Sat Jan 27 2007 Pavel Tankov <tankov_pavel@yahoo.com>
-- Removed /usr/share/menu because it was not needed.
-- Fixed to reflect the new directory structure with the "os-specific"
-  and "installer-exclude" folders in mind.
-- TODO: handle manpages.
-- TODO: check whether user has java installed.
-* Mon Jan 08 2007 Pavel Tankov <tankov_pavel@yahoo.com>
-- Initial RPM release.
 
+Thu, Apr 03 2014 Kishinskiy Oleg <legunt@yandex.ru>
+-add this to RussianFedora reposytories
