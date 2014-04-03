@@ -9,11 +9,11 @@
 %define libdir_name jitsi
 
 %define disablegost --disable-gost
-%ifarch x86_64 amd64
-  %define folder linux-64
-%else
-  %define folder linux
-%endif
+#%ifarch x86_64 amd64
+#  %define folder linux-64
+#%else
+#  %define folder linux
+#%endif
 
 Name:           jitsi
 Version:        2.4
