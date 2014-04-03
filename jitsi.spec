@@ -232,8 +232,8 @@ cp %{SOURCE3} %{buildroot}%{_datadir}/applications/
 %endif
 
 
-%clean
-rm -rf %{buildroot}
+#%clean
+#rm -rf %{buildroot}
 
 
 %files
