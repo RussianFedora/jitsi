@@ -191,7 +191,7 @@ cp %{SOURCE4} %{buildroot}%{_datadir}/pixmaps/
 
 #Install desktop file
 mkdir -p %{buildroot}%{_datadir}/applications/
-cp %{SOURCE3} %{buildroot}%{_datadir}/applications/
+#cp %{SOURCE3} %{buildroot}%{_datadir}/applications/
   desktop-file-install --add-category="Network;Telephony" --dir=%{buildroot}%{_datadir}/applications %{SOURCE3}
 
 
