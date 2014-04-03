@@ -111,5 +111,5 @@ sed -i -e "s/felix.cache.profiledir=jitsi.bin/felix.cache.profile=jitsi.bin/" %{
 
 %changelog
 
-Thu, Apr 03 2014 Kishinskiy Oleg <legunt@yandex.ru>
+* Thu Apr 03 2014 Kishinskiy Oleg <legunt@yandex.ru>
 -add this to RussianFedora reposytories
