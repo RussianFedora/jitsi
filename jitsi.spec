@@ -30,7 +30,6 @@ Source4:        jitsi_100x100.png
 Source5:        jdic_misc.tar.xz
 Source6:        ldns-1.6.11.tar.xz
 Source7:        unbound-1.4.14.tar.xz
-BuildRoot:      %{_tmppath}/%{name}-%{version}-build
 
 BuildRequires:  java >= 1.6.0 java-devel >= 1.6.0 xalan-j2 ant
 BuildRequires:  gcc-c++ dbus-devel xz unzip autoconf automake
