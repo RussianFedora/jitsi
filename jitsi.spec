@@ -1,3 +1,5 @@
+%undefine _missing_build_ids_terminate_build
+
 Name: jitsi
 Summary: Open Source Video Calls and Chat
 Summary(de): Open Source Anrufe und Chat
@@ -112,4 +114,4 @@ sed -i -e "s/felix.cache.profiledir=jitsi.bin/felix.cache.profile=jitsi.bin/" %{
 %changelog
 
 * Thu Apr 03 2014 Kishinskiy Oleg <legunt@yandex.ru>
--add this to RussianFedora reposytories
+ -add this to RussianFedora reposytories
