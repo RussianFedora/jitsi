@@ -1,10 +1,10 @@
 %undefine _missing_build_ids_terminate_build
 
 Name: jitsi
-Summary: Open Source Video Calls and Chat
+Summary: Open source video calls and chat
 Summary(de): Open Source Anrufe und Chat
 Version: 2.4.4997
-Release: 1%{?dist}
+Release: 2%{?dist}
 License: LGPLv2+
 URL: https://www.jitsi.org
 Source0: https://download.jitsi.org/jitsi/src/%{name}-src-%{version}.zip
@@ -31,7 +31,7 @@ MSN, Yahoo! Messenger, Bonjure, RSS und counting.
 %setup -q -n %{name}
 
 %build
-ant -Dlabel=build.%{buildversion} rebuild
+ant -Dlabel=build.4997 rebuild
 
 %install
 #Install bundles
@@ -89,9 +89,8 @@ desktop-file-install                                    \
 %{_datadir}/pixmaps/sc_logo_45x45.png
 %{_datadir}/pixmaps/jitsi.png
 %{_datadir}/applications/jitsi.desktop
-%attr(0755,root,root) %{_bindir}/jitsi
 
 %changelog
 
-* Thu Apr 03 2014 Kishinskiy Oleg <legunt@yandex.ru>  - 2.4.4997-1
+* Thu Apr 03 2014 Kishinskiy Oleg <legunt@yandex.ru>  - 2.4.4997-2
  - add this to RussianFedora reposytories
