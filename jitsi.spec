@@ -83,7 +83,6 @@ mkdir -p %{buildroot}%{_datadir}/applications/
 cp %{SOURCE3} %{buildroot}%{_datadir}/applications/jitsi.desktop
 
 %files
-%defattr(-,root,root,-)
 %{_libdir}/%{name}
 %{_datadir}/pixmaps/sc_logo_45x45.png
 %{_datadir}/pixmaps/jitsi.png
