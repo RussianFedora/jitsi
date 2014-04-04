@@ -94,5 +94,5 @@ desktop-file-install                                    \
 
 %changelog
 
-* Thu Apr 03 2014 Kishinskiy Oleg <legunt@yandex.ru> 
+* Thu Apr 03 2014 Kishinskiy Oleg <legunt@yandex.ru>  - 2.4.4997-1
  -add this to RussianFedora reposytories
