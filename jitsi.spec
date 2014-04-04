@@ -79,8 +79,11 @@ cp resources/images/logo/sc_logo_45x45.png %{buildroot}%{_datadir}/pixmaps/jitsi
 
 
 #Install desktop file
-mkdir -p %{buildroot}%{_datadir}/applications/
-cp %{SOURCE3} %{buildroot}%{_datadir}/applications/jitsi.desktop
+#mkdir -p %{buildroot}%{_datadir}/applications/
+desktop-file-install                                    \
+--dir=%{buildroot}%{_datadir}/applications              \
+%{SOURCE3}
+
 
 %files
 %{_libdir}/%{name}
@@ -91,5 +94,5 @@ cp %{SOURCE3} %{buildroot}%{_datadir}/applications/jitsi.desktop
 
 %changelog
 
-* Thu Apr 03 2014 Kishinskiy Oleg <legunt@yandex.ru>
+* Thu Apr 03 2014 Kishinskiy Oleg <legunt@yandex.ru> 
  -add this to RussianFedora reposytories
