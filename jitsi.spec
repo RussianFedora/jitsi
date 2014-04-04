@@ -11,7 +11,7 @@ Source0: https://download.jitsi.org/jitsi/src/%{name}-src-%{version}.zip
 Source1:        jitsi-32.sh
 Source2:        jitsi-64.sh
 Source3:	jitsi.desktop
-BuildRequires: java-devel-openjdk, ant
+BuildRequires: java-1.7.0-openjdk-devel, ant
 BuildRequires: desktop-file-utils
 Requires: jre
 
