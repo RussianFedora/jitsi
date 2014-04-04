@@ -1,0 +1,9 @@
+[Desktop Entry]
+Name=Jitsi
+GenericName=Jitsi
+Comment=VoIP and Instant Messaging client
+Icon=/usr/share/pixmaps/jitsi.png
+Type=Application
+Categories=Network;InstantMessaging;Chat;Telephony;VideoConference;Java;
+Exec=jitsi
+Terminal=false

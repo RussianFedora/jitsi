@@ -5,11 +5,12 @@ Summary: Open Source Video Calls and Chat
 Summary(de): Open Source Anrufe und Chat
 Version: 2.4.4997
 Release: 1%{?dist}
-Group: Applications/Internet
 License: LGPLv2+
 URL: https://www.jitsi.org
 Source0: https://download.jitsi.org/jitsi/src/%{name}-src-%{version}.zip
-Source1: jitsi.sh
+Source1:        jitsi-32.sh
+Source2:        jitsi-64.sh
+Source3:	jitsi.desktop
 BuildRequires: java-devel-openjdk, ant
 BuildRequires: desktop-file-utils
 Requires: jre
@@ -33,83 +34,61 @@ MSN, Yahoo! Messenger, Bonjure, RSS und counting.
 ant -Dlabel=build.%{buildversion} rebuild
 
 %install
-rm -rf %{buildroot}
-mkdir -p %{buildroot}
-mkdir -p %{buildroot}/usr
-mkdir -p %{buildroot}/usr/bin
-mkdir -p %{buildroot}/usr/share
-mkdir -p %{buildroot}/usr/share/applications
-mkdir -p %{buildroot}/usr/share/doc/jitsi
-mkdir -p %{buildroot}/usr/share/man/man1
-mkdir -p %{buildroot}/usr/share/pixmaps
-mkdir -p %{buildroot}/usr/lib/jitsi
-mkdir -p %{buildroot}/usr/lib/jitsi/lib
-mkdir -p %{buildroot}/usr/lib/jitsi/lib/bundle
-mkdir -p %{buildroot}/usr/lib/jitsi/lib/native
-mkdir -p %{buildroot}/usr/lib/jitsi/sc-bundles
+#Install bundles
+mkdir -p %{buildroot}%{_libdir}/%{name}
+rm -f sc-bundles/*-slick.jar
+mkdir -p %{buildroot}%{_libdir}/%{name}/sc-bundles
+cp -r sc-bundles/os-specific/linux/* %{buildroot}%{_libdir}/%{name}/sc-bundles/
+rm -f -r sc-bundles/os-specific
+cp -r sc-bundles/* %{buildroot}%{_libdir}/%{name}/sc-bundles/
 
-# copy the documentation
-cp resources/install/debian/jitsi.1.tmpl %{buildroot}/usr/share/man/man1/jitsi.1
-sed -i -e "s/_PACKAGE_NAME_/jitsi/"  %{buildroot}/usr/share/man/man1/jitsi.1
-sed -i -e "s/_APP_NAME_/Jitsi/"  %{buildroot}/usr/share/man/man1/jitsi.1
-gzip %{buildroot}/usr/share/man/man1/jitsi.1
+#Install other bundles and libs
+mkdir -p %{buildroot}%{_libdir}/%{name}/lib
+cp -r lib/bundle %{buildroot}%{_libdir}/%{name}/lib/
+rm -r -f lib/bundle
 
-# copy the launcher script
-cp -r %{SOURCE1} %{buildroot}%{_bindir}/jitsi
-sed -i -e "s/_PACKAGE_NAME_/jitsi/" %{buildroot}%{_bindir}/jitsi
-
-# no more libaoss
-chmod a+x %{buildroot}/usr/bin/jitsi
-
-# copy the menu icons
-cp resources/install/debian/jitsi-32.xpm %{buildroot}/usr/share/pixmaps/jitsi-32.xpm
-cp resources/install/debian/jitsi-16.xpm %{buildroot}/usr/share/pixmaps/jitsi-16.xpm
-cp resources/install/debian/jitsi.svg %{buildroot}/usr/share/pixmaps/jitsi.svg
-
-# copy the menu entry
-cp resources/install/debian/jitsi.desktop.tmpl %{buildroot}/usr/share/applications/jitsi.desktop
-sed -i -e "s/_PACKAGE_NAME_/jitsi/"  %{buildroot}/usr/share/applications/jitsi.desktop
-sed -i -e "s/_APP_NAME_/Jitsi/"      %{buildroot}/usr/share/applications/jitsi.desktop
-
-# copy the sc-bundles
-cp sc-bundles/*.jar %{buildroot}/usr/lib/jitsi/sc-bundles/
-# remove all slicks
-rm -rf %{buildroot}/usr/lib/jitsi/sc-bundles/*-slick.jar
-
-# copy the os-specific sc-bundles
-cp sc-bundles/os-specific/linux/*.jar %{buildroot}/usr/lib/jitsi/sc-bundles/
-
-# copy the lib jars
-cp lib/*.jar %{buildroot}/usr/lib/jitsi/lib/
-cp lib/bundle/* %{buildroot}/usr/lib/jitsi/lib/bundle/
-rm %{buildroot}/usr/lib/jitsi/lib/bundle/junit.jar
-##cp lib/os-specific/linux/*.jar $RPM_BUILD_ROOT/usr/lib/jitsi/lib/
-
-# copy the native libs
-%ifarch x86_64
-cp lib/native/linux-64/* %{buildroot}/usr/lib/jitsi/lib/native/
+#Install native libraries
+mkdir -p %{buildroot}%{_libdir}/%{name}/lib/native
+%ifarch x86_64 amd64
+    rm -r -f lib/native/linux-64/*exclude
+    cp lib/native/linux-64/* %{buildroot}%{_libdir}/%{name}/lib/native/
 %else
-cp lib/native/linux/* %{buildroot}/usr/lib/jitsi/lib/native/
+    rm -r -f lib/native/linux/*exclude
+    cp lib/native/linux/* %{buildroot}%{_libdir}/%{name}/lib/native/
 %endif
+rm -r -f lib/native
+rm -r -f lib/*exclude
+rm -r -f lib/os-specific
+cp -r lib/* %{buildroot}%{_libdir}/%{name}/lib/
+rm -f %{buildroot}%{_libdir}/%{name}/lib/native/libunix-java.so
+ln --symbolic %{_libdir}/libunix-java.so %{buildroot}%{_libdir}/%{name}/lib/native/libunix-java.so
 
-# copy the resources
-cp resources/install/logging.properties %{buildroot}/usr/lib/jitsi/lib/
-cp lib/felix.client.run.properties %{buildroot}/usr/lib/jitsi/lib/
+#Install executable start script
+mkdir -p %{buildroot}%{_bindir}
+%ifarch x86_64 amd64
+    cp -r %{SOURCE2} %{buildroot}%{_bindir}/jitsi
+%else
+    cp -r %{SOURCE1} %{buildroot}%{_bindir}/jitsi
+%endif
+sed -i -e "s;_JAVA_HOME_DIR_;%{java_home};"  %{buildroot}%{_bindir}/jitsi
 
-# Make felix deploy its bundles in ~/.felix/sip-communicator.bin
-sed -i -e "s/felix.cache.profiledir=jitsi.bin/felix.cache.profile=jitsi.bin/" %{buildroot}/usr/lib/jitsi/lib/felix.client.run.properties
+#Install icons
+mkdir -p %{buildroot}%{_datadir}/pixmaps
+cp resources/images/logo/sc_logo_45x45.png %{buildroot}%{_datadir}/pixmaps/
+cp resources/images/logo/sc_logo_45x45.png %{buildroot}%{_datadir}/pixmaps/jitsi.png
 
-#%clean
-#rm -rf %{buildroot}
+
+#Install desktop file
+mkdir -p %{buildroot}%{_datadir}/applications/
+cp %{SOURCE3} %{buildroot}%{_datadir}/applications/jitsi.desktop
 
 %files
-%{_bindir}/%{name}
-%{_datadir}/applications/%{name}.desktop
-/usr/lib/%{name}
-%{_mandir}/man1/%{name}.1.gz
-%{_datadir}/pixmaps/%{name}-16.xpm
-%{_datadir}/pixmaps/%{name}-32.xpm
-%{_datadir}/pixmaps/%{name}.svg
+%defattr(-,root,root,-)
+%{_libdir}/%{name}
+%{_datadir}/pixmaps/sc_logo_45x45.png
+%{_datadir}/pixmaps/jitsi.png
+%{_datadir}/applications/jitsi.desktop
+%attr(0755,root,root) %{_bindir}/jitsi
 
 %changelog
 
