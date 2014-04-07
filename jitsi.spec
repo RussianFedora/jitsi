@@ -89,6 +89,7 @@ desktop-file-install                                    \
 %{_datadir}/pixmaps/sc_logo_45x45.png
 %{_datadir}/pixmaps/jitsi.png
 %{_datadir}/applications/jitsi.desktop
+%attr(0755,root,root) %{_bindir}/jitsi
 
 %changelog
 
