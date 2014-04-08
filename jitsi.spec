@@ -4,7 +4,7 @@ Name: jitsi
 Summary: Open source video calls and chat
 Summary(de): Open Source Anrufe und Chat
 Version: 2.4.4997
-Release: 2%{?dist}
+Release: 3%{?dist}
 License: LGPLv2+
 URL: https://www.jitsi.org
 Source0: https://download.jitsi.org/jitsi/src/%{name}-src-%{version}.zip
