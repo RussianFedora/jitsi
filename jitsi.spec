@@ -92,10 +92,10 @@ desktop-file-install                                    \
 %attr(0755,root,root)%{_bindir}/jitsi
 
 %changelog
-* Tue Apr 08 2014 Kishinsky Oleg <legunt@yandex.ru> - 2.4.499-4
+* Tue Apr 08 2014 Kishinsky Oleg <legunt@yandex.ru> - 2.4.4997-4
  - Fix Permition for /usr/bin/jitsi
 
-* Tue Apr 08 2014 Kishinsky Oleg <legunt@yandex.ru> - 2.4.499-3
+* Tue Apr 08 2014 Kishinsky Oleg <legunt@yandex.ru> - 2.4.4997-3
  - Fix error with "Requires jre"
  
 * Thu Apr 03 2014 Kishinskiy Oleg <legunt@yandex.ru>  - 2.4.4997-2
