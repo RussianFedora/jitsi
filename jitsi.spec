@@ -4,7 +4,7 @@ Name: jitsi
 Summary: Open source video calls and chat
 Summary(de): Open Source Anrufe und Chat
 Version: 2.4.4997
-Release: 3%{?dist}
+Release: 4%{?dist}
 License: LGPLv2+
 URL: https://www.jitsi.org
 Source0: https://download.jitsi.org/jitsi/src/%{name}-src-%{version}.zip
@@ -89,9 +89,11 @@ desktop-file-install                                    \
 %{_datadir}/pixmaps/sc_logo_45x45.png
 %{_datadir}/pixmaps/jitsi.png
 %{_datadir}/applications/jitsi.desktop
-%{_bindir}/jitsi
+%attr(0755,root,root)%{_bindir}/jitsi
 
 %changelog
+* Tue Apr 08 2014 Kishinsky Oleg <legunt@yandex.ru> - 2.4.499-4
+ - Fix Permition for /usr/bin/jitsi
 
 * Tue Apr 08 2014 Kishinsky Oleg <legunt@yandex.ru> - 2.4.499-3
  - Fix error with "Requires jre"
