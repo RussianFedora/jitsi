@@ -13,7 +13,7 @@ Source2: jitsi-64.sh
 Source3: jitsi.desktop
 BuildRequires: java-1.7.0-openjdk-devel, ant
 BuildRequires: desktop-file-utils
-Requires: jre
+Requires: java-1.7.0-openjdk
 
 
 %description
@@ -89,9 +89,12 @@ desktop-file-install                                    \
 %{_datadir}/pixmaps/sc_logo_45x45.png
 %{_datadir}/pixmaps/jitsi.png
 %{_datadir}/applications/jitsi.desktop
-%attr(0755,root,root) %{_bindir}/jitsi
+%{_bindir}/jitsi
 
 %changelog
 
+* Tue 08 Apr 2014 Kishinsky Oleg <legunt@yandex.ru> - 2.4.499-3
+ - Fix error with "Requires jre"
+ 
 * Thu Apr 03 2014 Kishinskiy Oleg <legunt@yandex.ru>  - 2.4.4997-2
  - add this to RussianFedora reposytories
