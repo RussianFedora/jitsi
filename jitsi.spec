@@ -93,7 +93,7 @@ desktop-file-install                                    \
 
 %changelog
 
-* Tue 08 Apr 2014 Kishinsky Oleg <legunt@yandex.ru> - 2.4.499-3
+* Tue Apr 08 2014 Kishinsky Oleg <legunt@yandex.ru> - 2.4.499-3
  - Fix error with "Requires jre"
  
 * Thu Apr 03 2014 Kishinskiy Oleg <legunt@yandex.ru>  - 2.4.4997-2
